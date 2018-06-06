@@ -1,7 +1,7 @@
 module.exports = {
     mode: 'development',
 
-    entry: "./src/index.tsx",
+    entry: "./src/app.tsx",
     output: {
         filename: "main.js",
         path: __dirname + "/dst"
