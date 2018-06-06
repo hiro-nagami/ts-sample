@@ -5,9 +5,7 @@ import Hello from './molecules/Hello';
 class App extends React.Component {
     render() {
         return (
-            <div>
-                <Hello compiler='TypeScript' framework='React' />
-            </div>
+            <Hello compiler='TypeScript' framework='React' />
         );
     }
 }
