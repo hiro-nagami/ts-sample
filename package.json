@@ -1,15 +1,21 @@
 {
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack -w"
+  },
   "dependencies": {
     "@types/react": "^16.3.14",
     "@types/react-dom": "^16.0.5",
     "awesome-typescript-loader": "^5.0.0",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
-    "source-map-loader": "^0.2.3",
-    "typescript": "^2.8.3",
-    "webpack": "^4.10.1"
+    "source-map-loader": "^0.2.3"
   },
   "devDependencies": {
+    "ts-loader": "^4.3.1",
+    "typescript": "^2.9.1",
+    "webpack": "^4.11.0",
+    "webpack-cli": "^3.0.2",
     "webpack-dev-server": "^3.1.4"
   }
 }
