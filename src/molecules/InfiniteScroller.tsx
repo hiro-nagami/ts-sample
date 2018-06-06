@@ -48,17 +48,18 @@ class InfiniteScroller extends React.Component<InfiniteScrollerProps, InfiniteSc
 
     render() {
         return (
-            <InfiniteScroll pageStart={0} 
-                            hasMore={this.state.page < 100}
-                            loadMore={this.loadNumbers}
-                            loader={<div className="loader" key={0}>Loading ...</div>}
-                            useWindow={false}
-            >
-                
-            
+            <div style={{height: '100vh', overflow: 'scroll'}}>
+                <InfiniteScroll pageStart={0} 
+                                hasMore={this.state.page < 10}
+                                loadMore={this.loadNumbers}
+                                loader={<div className="loader" key={0}>Loading ...</div>}
+                                threshold={50}
+                                useWindow={false}
+                >
                     {this.state.children}
-                
-            </InfiniteScroll>
+                    
+                </InfiniteScroll>
+            </div>
         )
     }
 }

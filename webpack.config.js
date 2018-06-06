@@ -10,7 +10,7 @@ module.exports = {
     // Configuration for dev server
     devServer: {
         contentBase: 'dst',
-        port: 3000
+        port: 3001
     },
 
     // Enable sourcemaps for debugging webpack's output.
