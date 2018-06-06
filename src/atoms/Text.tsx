@@ -7,6 +7,7 @@ interface TextProps {
 
 const StyledText = styled.text`
   color: #333333;
+  display: block;
 `;
 
 const Text = (props: TextProps) => {
