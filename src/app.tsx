@@ -2,18 +2,12 @@ import * as React from "react";
 import * as ReactDOM from 'react-dom';
 import Hello from './molecules/Hello';
 import InfiniteScroller from "./molecules/InfiniteScroller";
+import InfiniteScrollRoute from "./views/InfiniteScrollRoute";
 
 class App extends React.Component {
-    render() {
-        const texts = Array.from(Array(100).keys()).map((key) => {
-            return `No.${key + 1}`
-        })
-        
+    public render () {
         return (
-            <React.Fragment>
-                <Hello compiler='TypeScript' framework='React' />
-                <InfiniteScroller texts={texts} />
-            </React.Fragment>
+            <InfiniteScrollRoute />
         );
     }
 }
