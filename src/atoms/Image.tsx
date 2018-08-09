@@ -1,19 +1,20 @@
 import * as React from 'react';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { NO_IMAGE_URL } from '../app/constants';
 
 type Props = React.Props<HTMLImageElement> & {
   imageUrl: string;
+  onError?: () => void;
 }
 
 type State = {
   currentImageUrl: string;
 }
 
-const StyledText = styled.text`
-  color: #333333;
-  display: block;
-`;
+const imageStyle = {
+  width: 'inherit',
+  height: 'inherit',
+}
 
 class Image extends React.Component<Props, State> {
 
@@ -22,6 +23,8 @@ class Image extends React.Component<Props, State> {
     this.state = {
       currentImageUrl: this.props.imageUrl,
     }
+
+    this.onError = this.onError.bind(this);
   }
 
   public componentWillReceiveProps (props: Props) {
@@ -34,8 +37,8 @@ class Image extends React.Component<Props, State> {
 
   public render () {
     return (
-      <div>
-        <img src={this.props.imageUrl} onError={this.onError} />
+      <div style={imageStyle}>
+        <img src={this.state.currentImageUrl || ''} onError={this.onError} />
       </div>
     );
   }
@@ -44,7 +47,9 @@ class Image extends React.Component<Props, State> {
     this.setState({
       currentImageUrl: NO_IMAGE_URL,
     });
+
+    this.props.onError();
   }
 }
 
-export default Text;
+export default Image;

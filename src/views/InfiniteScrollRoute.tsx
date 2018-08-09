@@ -1,9 +1,7 @@
 import * as React from "react";
-import * as ReactDOM from 'react-dom';
 import InfiniteScroller from "../molecules/InfiniteScroller";
-import Hello from "../molecules/ProfileImage";
+import Hello from "../molecules/Hello";
 import Text from "../atoms/Text";
-import { resolve } from "path";
 
 
 type Props = React.Props<HTMLElement> & {
