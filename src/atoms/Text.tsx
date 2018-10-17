@@ -1,19 +1,17 @@
 import * as React from 'react';
 import styled from 'styled-components';
 
-interface TextProps {
-  text: string;
-}
-
 const StyledText = styled.text`
   color: #333333;
   display: block;
 `;
 
-const Text = (props: TextProps) => {
+class Text extends React.Component {
+  render() {
     return (
-        <StyledText>{props.text}</StyledText>
+      <StyledText>{this.props.children}</StyledText>
     );
+  }
 }
 
 export default Text;

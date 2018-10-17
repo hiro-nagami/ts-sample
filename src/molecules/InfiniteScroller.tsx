@@ -36,7 +36,7 @@ class InfiniteScroller extends React.Component<InfiniteScrollerProps, InfiniteSc
         console.log(start, end, texts);
 
         const components: JSX.Element[] = texts.map((text, index) => {
-            return <Text text={text} key={start+index+1} />
+            return <Text key={start+index+1}>{text}</Text>
         });
 
         let currentChildren = this.state.children;
