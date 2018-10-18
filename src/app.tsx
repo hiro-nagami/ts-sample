@@ -1,7 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from 'react-dom';
 import Hello from './molecules/Hello';
-import InfiniteScroller from "./molecules/InfiniteScroller";
 import * as Marked from "marked";
 import Editor from "./molecules/Editor";
 import Preview from "./molecules/Preview";

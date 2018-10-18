@@ -1,62 +1,34 @@
 import * as React from "react";
-import Text from '../atoms/Text'
 import * as InfiniteScroll from 'react-infinite-scroller';
 
-interface InfiniteScrollerProps { 
-    texts: string[];
+type Props = React.Props<HTMLElement> & { 
+    hasMore: boolean;
+    onLoad: (page: number) => Promise<void>;
  }
 
- interface InfiniteScrollerStates { 
-    children: JSX.Element[];
-    page: number;
- }
+ interface State {}
 
-class InfiniteScroller extends React.Component<InfiniteScrollerProps, InfiniteScrollerStates> {
-    constructor(props: any) {
+class InfiniteScroller extends React.Component<Props, State> {
+    constructor(props: Props) {
         super(props)
-
-        this.state = {
-            children: [],
-            page: 0
-        }
-
-        this.loadNumbers = this.loadNumbers.bind(this)
+        this.onLoad = this.onLoad.bind(this)
     }
 
-    sleep(milliseconds: number) {
-        return new Promise<void>(resolve => {
-            setTimeout(() => resolve(), milliseconds);
-        });
+    private onLoad(page: number) {
+        this.props.onLoad(page);
     }
 
-    async loadNumbers(page: number) {
-        let start = (page-1 < 0 ? 0 : page - 1) * 10;
-        let end = page * 10 - 1
-        const texts = this.props.texts.slice(start, end);
-        console.log(start, end, texts);
-
-        const components: JSX.Element[] = texts.map((text, index) => {
-            return <Text key={start+index+1}>{text}</Text>
-        });
-
-        let currentChildren = this.state.children;
-         const newChildren = currentChildren.concat(components)
-
-        await this.sleep(1000);
-        this.setState({children: newChildren, page: page})
-    }
-
-    render() {
+    public render() {
         return (
             <div style={{height: '100vh', overflow: 'scroll'}}>
                 <InfiniteScroll pageStart={0} 
-                                hasMore={this.state.page < 10}
-                                loadMore={this.loadNumbers}
+                                hasMore={this.props.hasMore}
+                                loadMore={this.onLoad}
                                 loader={<div className="loader" key={0}>Loading ...</div>}
                                 threshold={50}
                                 useWindow={false}
                 >
-                    {this.state.children}
+                    {this.props.children}
                     
                 </InfiniteScroll>
             </div>
