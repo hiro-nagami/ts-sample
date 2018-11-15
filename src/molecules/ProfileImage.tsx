@@ -11,7 +11,7 @@ type State = {
   isError: boolean;
 }
 
-const selfStyle = {
+const selfStyle: React.CSSProperties = {
   position: 'relative',
   width: 100,
   height: 100,
