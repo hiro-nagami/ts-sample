@@ -11,10 +11,14 @@ const StyledText = styled.text`
   transform: translateY(-50%);
 `;
 
-class Text extends React.Component {
+type Props = {
+  text: string
+}
+
+class Text extends React.Component<Props,{}> {
   render() {
     return (
-      <StyledText>{this.props.children}</StyledText>
+      <StyledText>{this.props.text}</StyledText>
     );
   }
 }

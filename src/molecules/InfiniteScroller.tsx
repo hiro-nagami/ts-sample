@@ -28,8 +28,8 @@ class InfiniteScroller extends React.Component<Props, State> {
                                 threshold={50}
                                 useWindow={false}
                 >
+
                     {this.props.children}
-                    
                 </InfiniteScroll>
             </div>
         )
