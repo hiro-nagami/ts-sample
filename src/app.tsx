@@ -1,12 +1,8 @@
 import * as React from "react";
 import * as ReactDOM from 'react-dom';
-import Hello from './molecules/Hello';
-import * as Marked from "marked";
-import Editor from "./molecules/Editor";
-import Preview from "./molecules/Preview";
+import BasePage from './views/BasePage';
 
 interface AppProps {
-
 }
 
 type AppState = {
@@ -21,17 +17,8 @@ class App extends React.Component<AppProps, AppState> {
     }
 
     render() {
-        const texts = Array.from(Array(100).keys()).map((key) => {
-            return `No.${key + 1}`
-        })
-        
         return (
-            <React.Fragment>
-                <Hello compiler='TypeScript' framework='React' />
-                <Editor onChangeMarkdown={(markdown) => { this.setState({ markdown })}} />
-                <Preview html={Marked.parse(this.state.markdown)} />
-                {/* <InfiniteScroller texts={texts} /> */}
-            </React.Fragment>
+            <BasePage />
         );
     }
 }
