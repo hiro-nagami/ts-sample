@@ -12,10 +12,10 @@ const imageStyle = {
 }
 
 export const Image = (props: Props) => {
-  const [ currentImageUrl, setCurrentImageUrl ] = useState<string>('')
+  const [ currentImageUrl, setCurrentImageUrl ] = useState<string>(NO_IMAGE_URL)
 
   useEffect(() => {
-    setCurrentImageUrl(props.imageUrl ?? '')
+    if (props.imageUrl) setCurrentImageUrl(props.imageUrl)
   }, [])
 
   
