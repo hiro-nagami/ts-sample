@@ -51,15 +51,15 @@ type TProviderProps = {
 
 let articles = range(0, 100).map((_,i) => {
     return new Article({
-        title: `${i + 1} - faker.lorem.sentence()`,
+        title: `${i + 1} - ${faker.lorem.sentence()}`,
         content: faker.lorem.sentence(),
-        imageUrl: faker.image.abstract(),
+        imageUrl: faker.image.abstract(640, 480, true),
     })
 })
 
 export const ArticleProvider = (props: TProviderProps) => {
     const createArticle = useCallback(async (props: CreateArticleQuery): Promise<CreateArticlesResult> => {
-        const article = new Article({ ...props, imageUrl: faker.image.abstract() })
+        const article = new Article({ ...props, imageUrl: faker.image.abstract(640, 480, true) })
         articles.push(article)
         return { article }
     }, [])
