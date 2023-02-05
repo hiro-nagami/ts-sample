@@ -1,33 +1,19 @@
-import * as React from 'react';
+import { Image } from '@chakra-ui/react';
+import { NO_IMAGE_URL } from '../../constants';
 
 type Props = {
-    imageUrl: string;
-    width: number,
-    height: number,
-    rounded: boolean,
-}
-  
-type State = {
-    imageUrl: string;
-    width: number,
-    height: number,
-    rounded: boolean,
+    imageUrl: string
 }
 
-class BaseImage extends React.Component<Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = this.props;
-    }
-
-    render () {
-        return (
-            <img width={ this.state.width } 
-                 height={ this.state.height } 
-                 src={this.state.imageUrl || ''} 
-                 style={{ borderRadius: this.state.rounded ? this.state.width / 2.0 : 0 }}/>
-        );
-      }
+export const BaseImage = (props: Props) => {
+    return (
+        <Image
+            w='100%'
+            overflow='hidden'
+            objectFit='cover'
+            src={ props.imageUrl ?? NO_IMAGE_URL} 
+        />
+    )
 }
 
-export default BaseImage;
+export default BaseImage

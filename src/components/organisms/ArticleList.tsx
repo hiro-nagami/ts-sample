@@ -1,37 +1,22 @@
-import { Box } from '@chakra-ui/react';
-import * as React from 'react';
+import { VStack } from '@chakra-ui/react';
+import { NO_IMAGE_URL } from '../../constants';
+import { Article } from '../../models/Article';
 import ArticleSection from '../molecules/ArticleSection';
-
-export class Article {
-    imageUrl: string
-    description: string
-
-    constructor(imageUrl: string, description: string) {
-        this.imageUrl = imageUrl
-        this.description = description
-    }
-}
 
 type TProps = {
     articles: Article[],
 }
 
 export const ArticleList = (props: TProps) => {
-    const [ articles, setArticles ] = React.useState<Article[]>([])
-
-    React.useEffect(() => {
-        setArticles(props.articles)
-    }, [])
-
     return (
-        <Box>
-            { articles.map((æarticle, index) => (
-                    <ArticleSection 
+        <VStack w='full' spacing={8}>
+            { props.articles.map((article, index) => (
+                <ArticleSection 
                     key={index}
-                    imageUrl={æarticle.imageUrl}
-                    description={æarticle.description}
+                    description={article.title}
+                    imageUrl={article.imageUrl ?? NO_IMAGE_URL}
                 />   
             ))}
-        </Box>
+        </VStack>
     )
 }

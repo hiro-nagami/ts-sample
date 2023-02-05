@@ -1,27 +1,17 @@
+import { Text } from '@chakra-ui/react';
 import * as React from 'react';
 
 type Props = {
-  size: number,
-  bold: boolean,
-  lineHeight: string,
-  textAlign: "center" |"left" | "right",
   children: React.ReactNode
 }
 
 
 const BaseText = (props: Props) => {
-
-  const style = {
-    fontSize: props.size,
-    lineHeight: props.lineHeight,
-    textAlign: props.textAlign,
-  }
-
   return (
-    <div style={ style }>
+    <Text size='1em'>
       { props.children }
-      </div>
-  );
+    </Text>
+  )
 }
 
 export default BaseText;
