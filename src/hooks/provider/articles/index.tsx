@@ -33,6 +33,7 @@ export class LoadArticleQuery {
 
 type LoadArticlesResult = {
     readonly articles: Article[]
+    readonly pageCount: number
 }
 
 interface ContextInterface {
@@ -68,7 +69,7 @@ export const ArticleProvider = (props: TProviderProps) => {
         const q = new LoadArticleQuery(query ?? new LoadArticleQuery({}))
         const start = q.page * q.limit
         const end   = start + q.limit   
-        return { articles: articles.slice(start, end) }
+        return { articles: articles.slice(start, end), pageCount: articles.length }
     }, [])
 
     return (

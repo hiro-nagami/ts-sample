@@ -1,21 +1,20 @@
-import { Box, Center } from "@chakra-ui/react"
+import { Center } from "@chakra-ui/react"
 import ReactPaginate from "react-paginate"
+import usePagenation from "../../../hooks/usePagenation"
 import './style.css'
 
-
-type TProps = {
-    handlePageClick: (data: { selected: number }) => void
-    limit: number
-}
+type TProps = {}
 
 export const Pagenation = (props: TProps) => {
+    const { count, allCount, setPage } = usePagenation()
+
     return <Center width='100%' overflow='hidden'>
         <ReactPaginate
             breakLabel="..."
             nextLabel=">"
-            onPageChange={props.handlePageClick}
+            onPageChange={(data) => setPage( data.selected )}
             pageRangeDisplayed={3}
-            pageCount={props.limit}
+            pageCount={ allCount / count }
             previousLabel="<"
             marginPagesDisplayed={1}
             pageClassName="page-item"

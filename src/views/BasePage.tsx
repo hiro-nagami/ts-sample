@@ -8,45 +8,52 @@ import { ArticleProvider, LoadArticleQuery } from '../hooks/provider/articles'
 import reactLogo from '../assets/react.svg'
 import { Article } from '../models/Article'
 import { Pagenation } from '../components/molecules/Pagenation'
+import { PagenationProvider } from '../hooks/provider/pagenation'
+import usePagenation from '../hooks/usePagenation'
 
 type TProps = {
 
 }
 
 const Component = (props: TProps) => {
+    const { 
+        page,
+        count,
+        setCount,
+        setAllCount,
+     } = usePagenation()
+
     const [ articles, setArticles ] = useState<Article[]>([])
     const { loadArticles } = useArticle()
-    const [ limit, setLimit ] = useState(10)
-    const [ selected, setSelected ] = useState(0)
+
+    useEffect(() => {
+        setCount(10)
+    }, [])
 
     useEffect(() => {
         const query = new LoadArticleQuery({
-            page: selected,
-            limit: limit
+            page: page,
+            limit: count
         })
-        console.log('selected: ', selected)
+
         loadArticles(query)
         .then(res => {
-            console.log("%o", res.articles)
             setArticles(res.articles)
+            setAllCount(res.pageCount)
         })
         .catch(err => {
             console.log(err)
         })
-    }, [selected, limit])
-
-    const handlePageClick = (data: { selected: number }) => {
-        setSelected(data.selected)
-    }
+    }, [page, count])
 
     return (
         <Container w='full'>
             <Header />
             <VStack w='full'>
                 <ArticleList articles={ articles }/>
-                <Pagenation handlePageClick={ handlePageClick } limit={ limit }/>
+                <Pagenation />
                 <Box w='8rem'>
-                <ProfileSection imageUrl={ reactLogo } name="Sample Name"/>
+                    <ProfileSection imageUrl={ reactLogo } name="Sample Name"/>
                 </Box>
             </VStack>
         </Container>
@@ -56,7 +63,9 @@ const Component = (props: TProps) => {
 export const BasePage = (props: TProps) => {
     return (
         <ArticleProvider>
-            <Component { ...props }/>
+            <PagenationProvider>
+                <Component { ...props }/>
+            </PagenationProvider>
         </ArticleProvider>
     )
 }
