@@ -14,7 +14,7 @@ export const Pagenation = (props: TProps) => {
             nextLabel=">"
             onPageChange={(data) => setPage( data.selected )}
             pageRangeDisplayed={3}
-            pageCount={ allCount / count }
+            pageCount={ (allCount + count - 1) / count }
             previousLabel="<"
             marginPagesDisplayed={1}
             pageClassName="page-item"
