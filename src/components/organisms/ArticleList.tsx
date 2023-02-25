@@ -1,8 +1,6 @@
-import { Box, VStack } from '@chakra-ui/react';
+import { Box, useDisclosure, VStack } from '@chakra-ui/react';
 import { useCallback, useState } from 'react';
 import { NO_IMAGE_URL } from '../../constants';
-import { AlertDialogProvider } from '../../hooks/provider/AlertDialog';
-import { useAlertDialog } from '../../hooks/useAlertDialog';
 import { Article } from '../../models/Article';
 import ArticleSection from '../molecules/ArticleSection';
 import { CkrAlertDialog } from '../molecules/CkrAlertDialog';
@@ -13,26 +11,34 @@ type TProps = {
 }
 
 const Component = (props: TProps) => {
-    const { onOpen, setContent } = useAlertDialog()
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const [ data, setData ] = useState<any>({})
 
     const onClick = useCallback((data: any) => {
-        setContent({
-            title: "検索",
-            message: `下記の内容で検索しますか？\n\n${JSON.stringify(data)}`,
-            okText: "検索",
-            cancelText: "",
-        })
         setData(data)
         onOpen()
     }, [])
 
+    const onOk = () => {
+        onClose()
+        console.log(`%o`, data)
+    }
+
+    const onCancel = () => {
+        onClose()
+    }
+
+    const content = {
+        title: "検索",
+        message: `下記の内容で検索しますか？\n\n${JSON.stringify(data)}`,
+        okText: "検索",
+        cancelText: "",
+    }
+
     return (
         <Box>
             <Filter onSubmit={ onClick } />
-            <CkrAlertDialog onOk={ () => {
-                console.log(`%o`, data)
-            } } />
+            <CkrAlertDialog content={ content } isOpen={ isOpen } onOk={ onOk } onCancel={ onCancel } />
             <VStack w='full' spacing={8}>
                 { props.articles.map((article, index) => (
                     <ArticleSection 
@@ -48,8 +54,6 @@ const Component = (props: TProps) => {
 
 export const ArticleList = (props: TProps) => {
     return (
-        <AlertDialogProvider>
-            <Component { ...props } />
-        </AlertDialogProvider>
+        <Component { ...props } />
     )
 }

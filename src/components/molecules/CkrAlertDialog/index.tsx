@@ -1,10 +1,17 @@
 import { AlertDialog, AlertDialogBody, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogOverlay, Button } from "@chakra-ui/react"
 import { useRef } from "react"
-import { useAlertDialog } from "../../../hooks/useAlertDialog"
 
 type TProps = {
+    content: {
+        title?: string,
+        message?: string,
+        okText: string,
+        cancelText?: string,
+    }
+    isOpen: boolean
     onOk: () => void
     onCancel?: () => void
+    closeOutside?: boolean
 }
 
 const Component = (props: TProps) => {
@@ -16,28 +23,18 @@ const Component = (props: TProps) => {
             cancelText,
         },
         isOpen,
-        onClose
-    } = useAlertDialog()
+        onOk,
+        onCancel,
+        closeOutside,
+    } = props
 
     const cancelRef = useRef<HTMLButtonElement | null>(null)
-
-    const onOk = () => {
-        props.onOk()
-        onClose()
-    }
-
-    const onCancel = () => {
-        if (props.onCancel) {
-            props.onCancel()
-        }
-        onClose()
-    }
 
     return (
         <AlertDialog
             isOpen={ isOpen }
             leastDestructiveRef={ cancelRef }
-            onClose={ onClose }
+            onClose={ closeOutside && onCancel ? onCancel : () => {} }
         >
             <AlertDialogOverlay>
                 <AlertDialogContent>
