@@ -1,8 +1,11 @@
+import { RecoilRoot } from 'recoil'
 import { BasePage } from './views/BasePage'
 
 function App() {
   return (
-    <BasePage />
+    <RecoilRoot>
+      <BasePage />
+    </RecoilRoot>
   )
 }
 

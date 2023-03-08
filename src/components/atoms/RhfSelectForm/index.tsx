@@ -1,57 +1,9 @@
-import { FormControl, FormErrorMessage, FormLabel } from "@chakra-ui/react"
-import { Props, Select as ChakraSelect } from "chakra-react-select"
 import { FieldValues, useController, UseControllerProps } from "react-hook-form"
-
-export type TSelectOption = {
-    value: string,
-    label: string,
-}
-
-type SelectFormProps<Option> = {
-    label?: string,
-    isMulti?: boolean,
-    isOptional?: boolean,
-    options: TSelectOption[],
-    placeholder?: string,
-    selectedValue: TSelectOption | TSelectOption[],
-    errorMessage?: string;
-} & Props<Option>
-
-export type RhfSelectFormProps<T extends FieldValues> = Omit<
-  SelectFormProps<TSelectOption>,
-  "selectedValue"
-> &
-  UseControllerProps<T>
-
-const SelectForm = (props: SelectFormProps<TSelectOption>) => {
-    const {
-        name,
-        label,
-        isMulti,
-        isOptional,
-        options,
-        placeholder,
-        selectedValue,
-        errorMessage,
-        ...rest
-    } = props;
-
-    const newOptions = isOptional ? [{ value: "", label: "選択してください" }, ...options] : options
-    
-    return  (
-        <FormControl id={ name } isInvalid={ !!errorMessage }>
-            { label ? <FormLabel>{ label }</FormLabel> : null }
-            <ChakraSelect 
-                value={ selectedValue }
-                isMulti={ isMulti }
-                options={ newOptions }
-                placeholder={ placeholder }
-                { ...rest }
-            />
-            { !!errorMessage && <FormErrorMessage>{ errorMessage }</FormErrorMessage> }
-        </FormControl>
-    )
-}
+import * as Chakra from "./chakra";
+import * as Antd from "./antd";
+import { RhfSelectFormProps } from "./interface";
+import { useRecoilState } from "recoil";
+import { UiType, UiTypeState } from "../../../hooks/recoil";
 
 export const RhfSelectForm = <T extends FieldValues, >(props: RhfSelectFormProps<T>) => {
     const {
@@ -69,22 +21,26 @@ export const RhfSelectForm = <T extends FieldValues, >(props: RhfSelectFormProps
         field: { onChange, onBlur, ref, value: selectedValue, ...rest  },
         fieldState: { error },
     } = useController<T>({ name, control })
-    
+
+    const [ uiType ] = useRecoilState(UiTypeState)
+
+    const Select = uiType == UiType.CHAKRA ? Chakra.SelectForm : Antd.SelectForm
+
     return (
-            <SelectForm 
-                label={ label }
-                selectedValue={ selectedValue }
-                isMulti={ isMulti }
-                isOptional={ isOptional }
-                options={ options }
-                onChange={ (e, a) => {
-                    onChange(e)
-                    if (cuntomOnChange) cuntomOnChange(e,a)
-                }}
-                onBlur={ onBlur }
-                placeholder={ placeholder ?? "選択" }
-                errorMessage={ error?.message }
-                // ref={ ref }
-            />
+        <Select
+            label={ label }
+            selectedValue={ selectedValue }
+            isMulti={ isMulti }
+            isOptional={ isOptional }
+            options={ options }
+            onChange={ (e) => {
+                onChange(e)
+                if (cuntomOnChange) cuntomOnChange(e)
+            }}
+            onBlur={ onBlur }
+            placeholder={ placeholder ?? "選択" }
+            errorMessage={ error?.message }
+            // ref={ ref }
+        />
     )
 }
