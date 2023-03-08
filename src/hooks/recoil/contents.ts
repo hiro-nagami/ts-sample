@@ -54,8 +54,8 @@ export const useFetch = () => useRecoilCallback(({ snapshot, set }) => async (id
     return value
 })
 
-export const useCountUp = () => useRecoilCallback(({ set }) => async () => {
-    set(cacheCountState('key1'), x => x + 1)
+export const useCountUp = () => useRecoilCallback(({ set }) => async (id: string) => {
+    set(cacheCountState(id), x => x + 1)
 })
 
 export const fetchEnableContent = (key: string) => {
