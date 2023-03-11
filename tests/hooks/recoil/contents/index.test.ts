@@ -4,20 +4,7 @@
 
 import { act } from '@testing-library/react';
 import { useFetch, useCountUp } from '../../imports';
-import { renderRecoilHook } from '../mock/renderRecoilHook';
-
-// act and advance jest timers
-const flushPromisesAndTimers = async (): Promise<void> => {
-  await act(
-    () =>
-      new Promise(resolve => {
-        setTimeout(resolve, 100)
-        jest.useFakeTimers()
-        jest.runAllTimers()
-      }),
-  )
-  return
-}
+import { renderRecoilHook } from '../helpers';
 
 const useMock = () => {
   const fetch = useFetch()
