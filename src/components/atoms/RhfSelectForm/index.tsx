@@ -1,8 +1,8 @@
-import { FieldValues, useController, UseControllerProps } from "react-hook-form"
+import { FieldValues, useController } from "react-hook-form"
 import * as Chakra from "./chakra";
 import * as Antd from "./antd";
-import { RhfSelectFormProps } from "./interface";
-import { useRecoilState } from "recoil";
+import { RhfSelectFormProps } from "./types";
+import { useRecoilValue } from "recoil";
 import { UiType, UiTypeState } from "../../../hooks/recoil";
 
 export const RhfSelectForm = <T extends FieldValues, >(props: RhfSelectFormProps<T>) => {
@@ -22,7 +22,7 @@ export const RhfSelectForm = <T extends FieldValues, >(props: RhfSelectFormProps
         fieldState: { error },
     } = useController<T>({ name, control })
 
-    const [ uiType ] = useRecoilState(UiTypeState)
+    const uiType = useRecoilValue(UiTypeState)
 
     const Select = uiType == UiType.CHAKRA ? Chakra.SelectForm : Antd.SelectForm
 

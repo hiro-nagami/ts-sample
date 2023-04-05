@@ -1,4 +1,4 @@
-import BaseText from '../atoms/BaseText';
+import { BaseText } from '../atoms/BaseText';
 import BaseImage from '../atoms/BaseImage';
 
 type TProps = {

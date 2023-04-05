@@ -1,7 +1,6 @@
 import { Center } from "@chakra-ui/react"
 import ReactPaginate from "react-paginate"
 import usePagenation from "../../../hooks/usePagenation"
-import './style.css'
 
 type TProps = {}
 

@@ -1,5 +1,5 @@
 import { Form, Select } from "antd";
-import { SelectFormProps } from "../interface";
+import { SelectFormProps } from "../types";
 
 export const SelectForm = (props: SelectFormProps) => {
     const {
@@ -19,7 +19,7 @@ export const SelectForm = (props: SelectFormProps) => {
     const mode = isMulti ? "multiple" : undefined
     
     return  (
-        <Form id={ name }>
+        <Form.Item id={ name }>
             {/* { label ? <FormLabel>{ label }</FormLabel> : null } */}
             <Select
                 mode={ mode }
@@ -29,6 +29,6 @@ export const SelectForm = (props: SelectFormProps) => {
                 { ...rest }
             />
             {/* { !!errorMessage && <FormErrorMessage>{ errorMessage }</FormErrorMessage> } */}
-        </Form>
+        </Form.Item>
     )
 }

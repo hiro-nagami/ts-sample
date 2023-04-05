@@ -1,5 +1,5 @@
 import * as React from "react";
-import Text from '../../components/atoms/Text'
+import Text from '../atoms/Text'
 
 type Props = { 
     compiler: string; 

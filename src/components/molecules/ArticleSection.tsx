@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import BaseText from '../atoms/BaseText';
+import { BaseText } from '../atoms/BaseText';
 import BaseImage from '../atoms/BaseImage';
 import BaseButton from '../atoms/BaseButton';
 import { Box, Card } from '@chakra-ui/react';

@@ -1,12 +1,8 @@
 import { Button, Container } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { RhfSelectForm, TSelectOption } from "../../atoms/RhfSelectForm";
-
-type TFormValues = {
-    select: TSelectOption
-    multiSelect: TSelectOption[]
-}
+import { Form } from "../../atoms/Form";
+import { RhfSelectForm, } from "../../atoms/RhfSelectForm";
 
 type TData = {
     selectValue: string
@@ -18,59 +14,53 @@ type TProps = {
 }
 
 const selectOptions = [
-    { value: '1', label: '1' },
-    { value: '2', label: '2' },
-    { value: '3', label: '3' },
-    { value: '4', label: '4' },
+    { value: '1', label: 'one' },
+    { value: '2', label: 'two' },
+    { value: '3', label: 'three' },
+    { value: '4', label: 'four' },
 ]
 
 const multiSelectOptions = [
-    { value: '5', label: '5' },
-    { value: '6', label: '6' },
-    { value: '7', label: '7' },
-    { value: '8', label: '8' },
+    { value: '5', label: 'five' },
+    { value: '6', label: 'six' },
+    { value: '7', label: 'seven' },
+    { value: '8', label: 'eight' },
 ]
 
 const Component = (props: TProps) => {
     const { 
         control,
-        handleSubmit,
         setValue,
+        handleSubmit,
         formState: { errors }
-    } = useForm<TFormValues>();
+    } = useForm<TData>();
 
     useEffect(() => {
-        setValue("select", selectOptions[0])
-        setValue("multiSelect", [ multiSelectOptions[0], multiSelectOptions[2] ])
+        setValue("selectValue", selectOptions[0].value)
+        setValue("multiSelectValue", [ multiSelectOptions[0], multiSelectOptions[2] ].map(v => v.value))
     }, [])
 
-    const onSubmit = (data: TFormValues) => {
-        const { select, multiSelect } = data
-        
-        props.onSubmit({
-            selectValue: select.value,
-            multiSelectValue: multiSelect.map(v => v.value)
-        })
-    }
+    const onSubmit = (data: TData) => props.onSubmit(data)
 
     return (
-        <Container as='form' onSubmit={ handleSubmit(onSubmit) }>
-            <RhfSelectForm 
-                name='select'
-                options={ selectOptions }
-                errorMessage={ errors.select?.message }
-                control={ control }
-            />
-            <RhfSelectForm 
-                name='multiSelect'
-                options={ multiSelectOptions }
-                errorMessage={ errors.multiSelect?.message }
-                control={ control }
-                isMulti
-            />
-            <Button type='submit' w='fill'>Submit</Button>
-        </Container>
-
+        <>
+            <Form onSubmit={ handleSubmit(onSubmit) }>   
+                <RhfSelectForm 
+                    name='selectValue'
+                    options={ selectOptions }
+                    errorMessage={ errors.selectValue?.message }
+                    control={ control }
+                />
+                <RhfSelectForm 
+                    name='multiSelectValue'
+                    options={ multiSelectOptions }
+                    errorMessage={ errors.multiSelectValue?.message }
+                    control={ control }
+                    isMulti
+                />
+                <Button type='submit' w='fill'>Submit</Button>
+            </Form>
+        </>
     )
 }
 
