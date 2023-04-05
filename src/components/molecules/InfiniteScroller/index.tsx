@@ -1,5 +1,5 @@
 import * as React from "react";
-import * as InfiniteScroll from 'react-infinite-scroller'
+import InfiniteScroll from 'react-infinite-scroller'
 
 type Props = { 
     children: React.ReactNode
