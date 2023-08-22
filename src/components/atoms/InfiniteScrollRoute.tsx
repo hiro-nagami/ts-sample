@@ -1,7 +1,7 @@
 import * as React from "react";
-import InfiniteScroller from "../components/molecules/InfiniteScroller";
-import Hello from "../components/molecules/Hello";
-import Text from "../components/atoms/Text";
+import InfiniteScroller from "../molecules/InfiniteScroller";
+import Hello from "../molecules/Hello";
+import Text from "./Text";
 
 
 type Props = {

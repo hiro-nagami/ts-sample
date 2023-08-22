@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { NO_IMAGE_URL } from '../../constants';
+import { NO_IMAGE_URL } from '../../utils/constants';
 
 type Props = {
   imageUrl: string | null

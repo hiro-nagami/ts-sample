@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
-import Header from '../components/organisms/Header'
-import { ArticleList } from '../components/organisms/ArticleList'
-import { ProfileSection } from '../components/molecules/ProfileSection'
+import Header from '../../src/components/organisms/Header'
+import { ArticleList } from '../../src/components/organisms/ArticleList'
+import { ProfileSection } from '../../src/components/molecules/ProfileSection'
 import { Box, Container, VStack } from '@chakra-ui/react'
-import useArticle from '../hooks/useArticles'
-import { ArticleProvider, LoadArticleQuery } from '../hooks/provider/articles'
-import reactLogo from '../assets/react.svg'
-import { Article } from '../models/Article'
-import { Pagenation } from '../components/molecules/Pagenation'
-import { PagenationProvider } from '../hooks/provider/pagenation'
-import usePagenation from '../hooks/usePagenation'
+import useArticle from '../../src/hooks/useArticles'
+import { ArticleProvider, LoadArticleQuery } from '../../src/hooks/provider/articles'
+// import reactLogo from '../../src/assets/react.svg'
+import { Article } from '../../src/models/Article'
+import { Pagenation } from '../../src/components/molecules/Pagenation'
+import { PagenationProvider } from '../../src/hooks/provider/pagenation'
+import usePagenation from '../../src/hooks/usePagenation'
 
 type TProps = {
 
@@ -53,14 +53,14 @@ const Component = (props: TProps) => {
                 <ArticleList articles={ articles }/>
                 <Pagenation />
                 <Box w='8rem'>
-                    <ProfileSection imageUrl={ reactLogo } name="Sample Name"/>
+                    <ProfileSection imageUrl={ '' } name="Sample Name"/>
                 </Box>
             </VStack>
         </Container>
     )
 }
 
-export const BasePage = (props: TProps) => {
+const Page = (props: TProps) => {
     return (
         <ArticleProvider>
             <PagenationProvider>
@@ -69,3 +69,5 @@ export const BasePage = (props: TProps) => {
         </ArticleProvider>
     )
 }
+
+export default Page

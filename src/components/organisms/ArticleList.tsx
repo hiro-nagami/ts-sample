@@ -1,5 +1,5 @@
 import { VStack } from '@chakra-ui/react';
-import { NO_IMAGE_URL } from '../../constants';
+import { NO_IMAGE_URL } from '../../utils/constants';
 import { Article } from '../../models/Article';
 import ArticleSection from '../molecules/ArticleSection';
 
