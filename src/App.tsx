@@ -1,11 +1,14 @@
 import { RecoilRoot } from 'recoil'
 import { BasePage } from './views/BasePage'
+import ErrorBoundary from 'antd/es/alert/ErrorBoundary'
 
 function App() {
   return (
-    <RecoilRoot>
-      <BasePage />
-    </RecoilRoot>
+    <ErrorBoundary>
+      <RecoilRoot>
+        <BasePage />
+      </RecoilRoot>
+    </ErrorBoundary>
   )
 }
 
